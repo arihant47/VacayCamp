@@ -25,7 +25,7 @@ app.get("/", function(req, res){
 
 app.get("/campgrounds", async function(req, res){
 	var campgrounds = await Campground.find({});
-	res.render("campgrounds/index");
+	res.render("campgrounds/index", {campgrounds});
 });
 app.listen(3000, function(){
 	console.log("The VacayCamp Server has started");
