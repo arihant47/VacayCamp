@@ -23,12 +23,10 @@ app.get("/", function(req, res){
 	res.render("home");
 });
 
-app.get("/makecampground", async function(req, res){
-	var camp = new Campground({title: "My Backyard", description: "Cheap Camping!"});
-	await camp.save();
-	res.send(camp);
+app.get("/campgrounds", async function(req, res){
+	var campgrounds = await Campground.find({});
+	res.render("campgrounds/index");
 });
-
 app.listen(3000, function(){
 	console.log("The VacayCamp Server has started");
 });
