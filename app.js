@@ -45,6 +45,10 @@ app.get("/campgrounds/:id", async function(req, res){
 	res.render("campgrounds/show", {campground});
 });
 
+app.get("/campgrounds/:id/edit", async function(req, res){
+	var campground = await Campground.findById(req.params.id)
+	res.render("campgrounds/edit", {campground});
+});
 
 app.listen(3000, function(){
 	console.log("The VacayCamp Server has started");
