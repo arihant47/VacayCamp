@@ -1,7 +1,7 @@
 var express = require("express");
 var path = require("path");
 var mongoose = require("mongoose");
-var methodOverride = require("methond-override");
+var methodOverride = require("method-override");
 var Campground = require("./models/campground");
 var app = express();
 
@@ -53,7 +53,9 @@ app.get("/campgrounds/:id/edit", async function(req, res){
 });
 
 app.put("/campgrounds/:id", async function(req, res){
-	res.send("It Worked!!");
+	var {id}= req.params;
+	var campground = await Campground.findByIdAndUpdate(id, {...req.body.campground});  //Using spread (...) operator here
+	res.redirect(`/campgrounds/${campground._id}`);
 });
 
 app.listen(3000, function(){
