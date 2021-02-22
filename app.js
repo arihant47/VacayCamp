@@ -1,6 +1,7 @@
 var express = require("express");
 var path = require("path");
 var mongoose = require("mongoose");
+var methodOverride = require("methond-override");
 var Campground = require("./models/campground");
 var app = express();
 
@@ -20,6 +21,7 @@ app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.urlencoded({extended: true}))
+app.use(methodOverride("_method"));
 
 app.get("/", function(req, res){
 	res.render("home");
@@ -48,6 +50,10 @@ app.get("/campgrounds/:id", async function(req, res){
 app.get("/campgrounds/:id/edit", async function(req, res){
 	var campground = await Campground.findById(req.params.id)
 	res.render("campgrounds/edit", {campground});
+});
+
+app.put("/campgrounds/:id", async function(req, res){
+	res.send("It Worked!!");
 });
 
 app.listen(3000, function(){
