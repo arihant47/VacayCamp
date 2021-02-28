@@ -60,7 +60,7 @@ app.put("/campgrounds/:id", async function(req, res){
 
 app.delete("/campgrounds/:id", async function(req, res){
 	var {id} = req.params;
-	await Campground.findByIdandDelete(id);
+	await Campground.findByIdAndDelete(id);
 	res.redirect("/campgrounds");
 });
 
