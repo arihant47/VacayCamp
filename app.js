@@ -58,6 +58,12 @@ app.put("/campgrounds/:id", async function(req, res){
 	res.redirect(`/campgrounds/${campground._id}`);
 });
 
+app.delete("/campgrounds/:id", async function(req, res){
+	var {id} = req.params;
+	await Campground.findByIdandDelete(id);
+	res.redirect("/campgrounds");
+});
+
 app.listen(3000, function(){
 	console.log("The VacayCamp Server has started");
 });
