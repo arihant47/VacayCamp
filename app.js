@@ -4,6 +4,7 @@ var mongoose = require("mongoose");
 var ejsMate = require("ejs-mate");
 var methodOverride = require("method-override");
 var Campground = require("./models/campground");
+var catchAsync = require("./utils/catchAsync");
 var app = express();
 
 mongoose.connect("mongodb://localhost/vacay-camp", {
