@@ -39,15 +39,11 @@ app.get("/campgrounds/new", function(req, res){
 	res.render("campgrounds/new");
 });
 
-app.post("/campgrounds", async function(req, res, next){
-	try{
-		var campground = new Campground(req.body.campground);
-		await campground.save();
-		res.redirect(`/campgrounds/${campground._id}`);
-	} catch(e) {
-		next(e);
-	}
-}); 
+app.post("/campgrounds", catchAsync( async function(req, res, next){
+	var campground = new Campground(req.body.campground);
+	await campground.save();
+	res.redirect(`/campgrounds/${campground._id}`);
+})); 
 
 app.get("/campgrounds/:id", async function(req, res){
 	var campground = await Campground.findById(req.params.id)
