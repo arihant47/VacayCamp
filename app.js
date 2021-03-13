@@ -5,6 +5,7 @@ var ejsMate = require("ejs-mate");
 var methodOverride = require("method-override");
 var Campground = require("./models/campground");
 var catchAsync = require("./utils/catchAsync");
+var ExpressError = require("./utils/ExpressError");
 var app = express();
 
 mongoose.connect("mongodb://localhost/vacay-camp", {
@@ -66,6 +67,8 @@ app.delete("/campgrounds/:id", catchAsync(async function(req, res){
 	await Campground.findByIdAndDelete(id);
 	res.redirect("/campgrounds");
 }));
+
+
 
 app.use((err, req, res, next) => {
 	res.send("Oh boy, something went wrong!");
