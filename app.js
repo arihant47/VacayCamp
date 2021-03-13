@@ -74,8 +74,8 @@ app.all("*", function(req, res, next){
 });
 
 app.use((err, req, res, next) => {
-	var {statusCode = 500, message = "Something went wrong"} = err;
-	res.status(statusCode).render("error");
+	if(!err.message) err.message="Oh No, Something Went Wrong!"
+	res.status(statusCode).render("error", {err});
 });
 
 app.listen(3000, function(){
