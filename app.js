@@ -31,7 +31,7 @@ app.get("/", function(req, res){
 	res.render("home");
 });
 
-app.get("/campgrounds", catchasync(async function(req, res){
+app.get("/campgrounds", catchAsync(async function(req, res){
 	var campgrounds = await Campground.find({});
 	res.render("campgrounds/index", {campgrounds});
 }));
