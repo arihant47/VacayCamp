@@ -47,9 +47,16 @@ app.post("/campgrounds", catchAsync( async function(req, res, next){
 		campground: Joi.object({
 			title: Joi.string().required(),
 			price: Joi.number().required().min(0),
+			image: Joi.string().required(),
+			location: Joi.string().required(),
+			description: Joi.string().required()
 		}).required()
 	})
-	var result = campgroundSchema.validate(req.body);
+	var {error} = campgroundSchema.validate(req.body);
+	if(error){
+		var msg = error.details.map(el => el.message).join(",")
+		throw new ExpressError(msg, 400)
+	}
 	console.log(result);
 	var campground = new Campground(req.body.campground);
 	await campground.save();
