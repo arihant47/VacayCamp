@@ -6,6 +6,7 @@ var methodOverride = require("method-override");
 var Campground = require("./models/campground");
 var catchAsync = require("./utils/catchAsync");
 var ExpressError = require("./utils/ExpressError");
+var Joi = require("joi");
 var app = express();
 
 mongoose.connect("mongodb://localhost/vacay-camp", {
