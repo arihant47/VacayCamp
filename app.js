@@ -28,6 +28,24 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({extended: true}))
 app.use(methodOverride("_method"));
 
+var validateCampground = (req, res, next) => {
+	var campgroundSchema = Joi.object({
+		campground: Joi.object({
+		title: Joi.string().required(),
+		price: Joi.number().required().min(0),
+		image: Joi.string().required(),
+		location: Joi.string().required(),
+		description: Joi.string().required()
+		}).required()
+	})
+	var {error} = campgroundSchema.validate(req.body);
+	if(error){
+		var msg = error.details.map(el => el.message).join(",")
+		throw new ExpressError(msg, 400)
+	}
+	console.log(result);
+}
+
 app.get("/", function(req, res){
 	res.render("home");
 });
