@@ -78,7 +78,7 @@ app.get("/campgrounds/:id/edit", catchAsync( async function(req, res){
 	res.render("campgrounds/edit", {campground});
 }));
 
-app.put("/campgrounds/:id", catchAsync( async function(req, res){
+app.put("/campgrounds/:id", validateCampground, catchAsync( async function(req, res){
 	var {id}= req.params;
 	var campground = await Campground.findByIdAndUpdate(id, {...req.body.campground});  //Using spread (...) operator here
 	res.redirect(`/campgrounds/${campground._id}`);
