@@ -42,8 +42,9 @@ var validateCampground = (req, res, next) => {
 	if(error){
 		var msg = error.details.map(el => el.message).join(",")
 		throw new ExpressError(msg, 400)
+	} else {
+		next();
 	}
-	console.log(result);
 }
 
 app.get("/", function(req, res){
@@ -59,7 +60,7 @@ app.get("/campgrounds/new", function(req, res){
 	res.render("campgrounds/new");
 });
 
-app.post("/campgrounds", catchAsync( async function(req, res, next){
+app.post("/campgrounds", validateCampground, catchAsync( async function(req, res, next){
 	// if(!req.body.campground) throw new ExpressError("Invalid Campground Data", 400);
 
 	var campground = new Campground(req.body.campground);
