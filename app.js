@@ -7,6 +7,7 @@ var Campground = require("./models/campground");
 var catchAsync = require("./utils/catchAsync");
 var ExpressError = require("./utils/ExpressError");
 var Joi = require("joi");
+var {campgroundSchema} = require("./schemas.js");
 var app = express();
 
 mongoose.connect("mongodb://localhost/vacay-camp", {
