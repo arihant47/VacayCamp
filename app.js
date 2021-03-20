@@ -8,6 +8,7 @@ var catchAsync = require("./utils/catchAsync");
 var ExpressError = require("./utils/ExpressError");
 var Joi = require("joi");
 var {campgroundSchema} = require("./schemas.js");
+var Review = require("./models/review");
 var app = express();
 
 mongoose.connect("mongodb://localhost/vacay-camp", {
@@ -83,8 +84,13 @@ app.delete("/campgrounds/:id", catchAsync(async function(req, res){
 }));
 
 app.post("/campgrounds/:id/reviews", catchAsync(async function(req, res){
-	res.send("You made it!!");
+	var campground = await Campground.findById(req.params.id);
+	var review = new Review(req.body.review);
+	campground.reviews.push(review);
+	await review.save();
+	await campground.save();
 }));
+
 app.all("*", function(req, res, next){
 	next(new ExpressError("Page not found!", 404))
 });
