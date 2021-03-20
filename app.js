@@ -89,6 +89,7 @@ app.post("/campgrounds/:id/reviews", catchAsync(async function(req, res){
 	campground.reviews.push(review);
 	await review.save();
 	await campground.save();
+	res.redirect(`/campgrounds/${campground._id}`);
 }));
 
 app.all("*", function(req, res, next){
