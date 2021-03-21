@@ -7,7 +7,7 @@ var Campground = require("./models/campground");
 var catchAsync = require("./utils/catchAsync");
 var ExpressError = require("./utils/ExpressError");
 var Joi = require("joi");
-var {campgroundSchema} = require("./schemas.js");
+var {campgroundSchema, reviewSchema} = require("./schemas.js");
 var Review = require("./models/review");
 var app = express();
 
@@ -32,6 +32,16 @@ app.use(methodOverride("_method"));
 
 var validateCampground = (req, res, next) => {
 	var {error} = campgroundSchema.validate(req.body);
+	if(error){
+		var msg = error.details.map(el => el.message).join(",")
+		throw new ExpressError(msg, 400)
+	} else {
+		next();
+	}
+}
+
+var validateReview = (req, res, next) => {
+	var {error} = reviewSchema.validate(req.body);
 	if(error){
 		var msg = error.details.map(el => el.message).join(",")
 		throw new ExpressError(msg, 400)
@@ -83,7 +93,7 @@ app.delete("/campgrounds/:id", catchAsync(async function(req, res){
 	res.redirect("/campgrounds");
 }));
 
-app.post("/campgrounds/:id/reviews", catchAsync(async function(req, res){
+app.post("/campgrounds/:id/reviews", validateReview, catchAsync(async function(req, res){
 	var campground = await Campground.findById(req.params.id);
 	var review = new Review(req.body.review);
 	campground.reviews.push(review);
