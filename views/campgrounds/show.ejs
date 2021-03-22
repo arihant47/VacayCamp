@@ -40,7 +40,8 @@
 		<!-- Loop over campground reviews -->
 		<% for(let review of campground.reviews) { %>	
 		<div class="mb-3">
-			<p><%= review.body %></p>
+			<p>Rating: <%= review.rating %></p>
+			<p>Review: <%= review.body %></p>
 		</div>
 		<% } %>
     </div>
