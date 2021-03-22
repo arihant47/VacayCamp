@@ -39,10 +39,10 @@
 		</form>
 		<!-- Loop over campground reviews -->
 		<% for(let review of campground.reviews) { %>
-		<div class="card">
-			<div class="mb-3">
-				<p>Rating: <%= review.rating %></p>
-				<p>Review: <%= review.body %></p>
+		<div class="mb-3 card">
+			<div class="card-body">
+				<h5 class="card-title">Rating: <%= review.rating %></h5>
+				<p class="card-text">Review: <%= review.body %></p>
 			</div>
 		</div>
 		<% } %>
