@@ -103,7 +103,10 @@ app.post("/campgrounds/:id/reviews", validateReview, catchAsync(async function(r
 }));
 
 app.delete("/campgrounds/:id/reviews/:reviewId", catchAsync(async function(req, res){
-	res.send("DELETED");
+	var {id, reviewId} = req.params;
+	await Campground.findByIdAndUpdate(id, {$pull: {reviews: reviewId}});
+	await Review.findByIdAndDelete(reviewId);
+	res.redirect(`/campgrounds/${id}`);
 }));
 
 app.all("*", function(req, res, next){
