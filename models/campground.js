@@ -18,7 +18,7 @@ var CampgroundSchema = new Schema({
 
 CampgroundSchema.post("findOneAndDelete", async function(doc){
 	if(doc){
-		await Review.remove({
+		await Review.deleteMany({
 			_id: {
 				$in: doc.reviews  //review id is somewhere in document.reviews
 			}
