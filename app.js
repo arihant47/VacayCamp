@@ -102,6 +102,10 @@ app.post("/campgrounds/:id/reviews", validateReview, catchAsync(async function(r
 	res.redirect(`/campgrounds/${campground._id}`);
 }));
 
+app.delete("/campgrounds/:id/reviews/:reviewId", catchAsync(async function(req, res){
+	res.send("DELETED");
+}));
+
 app.all("*", function(req, res, next){
 	next(new ExpressError("Page not found!", 404))
 });
