@@ -54,45 +54,6 @@ app.get("/", function(req, res){
 	res.render("home");
 });
 
-app.get("/campgrounds", catchAsync(async function(req, res){
-	var campgrounds = await Campground.find({});
-	res.render("campgrounds/index", {campgrounds});
-}));
-
-app.get("/campgrounds/new", function(req, res){
-	res.render("campgrounds/new");
-});
-
-app.post("/campgrounds", validateCampground, catchAsync( async function(req, res, next){
-	// if(!req.body.campground) throw new ExpressError("Invalid Campground Data", 400);
-
-	var campground = new Campground(req.body.campground);
-	await campground.save();
-	res.redirect(`/campgrounds/${campground._id}`);
-})); 
-
-app.get("/campgrounds/:id",catchAsync(async function(req, res){
-	var campground = await Campground.findById(req.params.id).populate("reviews");
-	res.render("campgrounds/show", {campground});
-}));
-
-app.get("/campgrounds/:id/edit", catchAsync( async function(req, res){
-	var campground = await Campground.findById(req.params.id)
-	res.render("campgrounds/edit", {campground});
-}));
-
-app.put("/campgrounds/:id", validateCampground, catchAsync( async function(req, res){
-	var {id}= req.params;
-	var campground = await Campground.findByIdAndUpdate(id, {...req.body.campground});  //Using spread (...) operator here
-	res.redirect(`/campgrounds/${campground._id}`);
-}));
-
-app.delete("/campgrounds/:id", catchAsync(async function(req, res){
-	var {id} = req.params;
-	await Campground.findByIdAndDelete(id);
-	res.redirect("/campgrounds");
-}));
-
 app.post("/campgrounds/:id/reviews", validateReview, catchAsync(async function(req, res){
 	var campground = await Campground.findById(req.params.id);
 	var review = new Review(req.body.review);
