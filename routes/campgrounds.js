@@ -39,3 +39,5 @@ router.delete("/campgrounds/:id", catchAsync(async function(req, res){
 	await Campground.findByIdAndDelete(id);
 	res.redirect("/campgrounds");
 }));
+
+module.exports = router;
