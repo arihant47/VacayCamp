@@ -11,6 +11,8 @@ var {campgroundSchema, reviewSchema} = require("./schemas.js");
 var Review = require("./models/review");
 var app = express();
 
+var campgrounds = require("./routes/campgrounds");
+
 mongoose.connect("mongodb://localhost/vacay-camp", {
 	useNewUrlParser: true,
 	useCreateIndex: true,
@@ -49,6 +51,8 @@ var validateReview = (req, res, next) => {
 		next();
 	}
 }
+
+app.use("/campgrounds", campgrounds)
 
 app.get("/", function(req, res){
 	res.render("home");
