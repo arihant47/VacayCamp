@@ -1,5 +1,5 @@
 var express = require("express");
-var router = express.Router();
+var router = express.Router({mergeParams: true});
 var catchAsync = require("../utils/catchAsync");
 var ExpressError = require("../utils/ExpressError");
 var Review = require("../models/review");
