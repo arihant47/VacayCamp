@@ -33,16 +33,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({extended: true}))
 app.use(methodOverride("_method"));
 
-var validateReview = (req, res, next) => {
-	var {error} = reviewSchema.validate(req.body);
-	if(error){
-		var msg = error.details.map(el => el.message).join(",")
-		throw new ExpressError(msg, 400)
-	} else {
-		next();
-	}
-}
-
 app.use("/campgrounds", campgrounds);
 app.use("/campgrounds/:id/reviews", reviews);
 
