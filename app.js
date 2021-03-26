@@ -3,12 +3,7 @@ var path = require("path");
 var mongoose = require("mongoose");
 var ejsMate = require("ejs-mate");
 var methodOverride = require("method-override");
-var Campground = require("./models/campground");
-var catchAsync = require("./utils/catchAsync");
 var ExpressError = require("./utils/ExpressError");
-var Joi = require("joi");
-var {campgroundSchema, reviewSchema} = require("./schemas.js");
-var Review = require("./models/review");
 var app = express();
 
 var campgrounds = require("./routes/campgrounds");
