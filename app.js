@@ -12,6 +12,7 @@ var Review = require("./models/review");
 var app = express();
 
 var campgrounds = require("./routes/campgrounds");
+var reviews = require("./routes/reviews");
 
 mongoose.connect("mongodb://localhost/vacay-camp", {
 	useNewUrlParser: true,
@@ -42,7 +43,8 @@ var validateReview = (req, res, next) => {
 	}
 }
 
-app.use("/campgrounds", campgrounds)
+app.use("/campgrounds", campgrounds);
+app.use("/campgrounds/:id/reviews", reviews);
 
 app.get("/", function(req, res){
 	res.render("home");
