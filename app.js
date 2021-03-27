@@ -31,6 +31,8 @@ app.use(methodOverride("_method"));
 app.use("/campgrounds", campgrounds);
 app.use("/campgrounds/:id/reviews", reviews);
 
+app.use(sxpress.static("public"));
+
 app.get("/", function(req, res){
 	res.render("home");
 });
