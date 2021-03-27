@@ -12,7 +12,8 @@ var reviews = require("./routes/reviews");
 mongoose.connect("mongodb://localhost/vacay-camp", {
 	useNewUrlParser: true,
 	useCreateIndex: true,
-	useUnifiedTopology: true
+	useUnifiedTopology: true,
+	useFindAndModify: false
 });
 
 var db = mongoose.connection;
