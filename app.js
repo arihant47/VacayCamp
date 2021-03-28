@@ -27,6 +27,13 @@ app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, 'views'));
 
+var sessionConfig = {
+	secret: 'thisisasecret!',
+	resave: false,
+	saveUninitialized: true
+}
+app.use(session())
+
 app.use(express.urlencoded({extended: true}))
 app.use(methodOverride("_method"));
 
