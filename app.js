@@ -32,7 +32,7 @@ var sessionConfig = {
 	resave: false,
 	saveUninitialized: true
 }
-app.use(session())
+app.use(session(sessionConfig))
 
 app.use(express.urlencoded({extended: true}))
 app.use(methodOverride("_method"));
