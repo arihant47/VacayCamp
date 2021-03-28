@@ -4,6 +4,7 @@ var mongoose = require("mongoose");
 var ejsMate = require("ejs-mate");
 var methodOverride = require("method-override");
 var ExpressError = require("./utils/ExpressError");
+var session = require("express-session");
 var app = express();
 
 var campgrounds = require("./routes/campgrounds");
