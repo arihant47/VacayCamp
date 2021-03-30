@@ -5,6 +5,7 @@ var ejsMate = require("ejs-mate");
 var methodOverride = require("method-override");
 var ExpressError = require("./utils/ExpressError");
 var session = require("express-session");
+var flash = require("connect-flash");
 var app = express();
 
 var campgrounds = require("./routes/campgrounds");
@@ -38,6 +39,7 @@ var sessionConfig = {
 	}
 }
 app.use(session(sessionConfig))
+app.use(flash());
 
 app.use(express.urlencoded({extended: true}))
 app.use(methodOverride("_method"));
