@@ -44,6 +44,10 @@ router.get("/:id",catchAsync(async function(req, res){
 
 router.get("/:id/edit", catchAsync( async function(req, res){
 	var campground = await Campground.findById(req.params.id)
+	if(!campground){
+		req.flash("error", "Cannot find that campground!");
+		return res.redirect("/campgrounds");
+	}
 	res.render("campgrounds/edit", {campground});
 }));
 
