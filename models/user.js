@@ -5,7 +5,11 @@ var Schema = mongoose.Schema;
 var UserSchema = new Schema({
 	email: {
 		type: String,
-		required: true
+		required: true,
+		unique: true
 	}
 });
+
 UserSchema.plugin(passportLocalMongoose);
+
+module.exports = mongoose.model("User", UserSchema);
