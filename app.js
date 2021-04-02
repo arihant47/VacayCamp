@@ -6,6 +6,8 @@ var methodOverride = require("method-override");
 var ExpressError = require("./utils/ExpressError");
 var session = require("express-session");
 var flash = require("connect-flash");
+var passport = require("passport");
+var LocalStrategy = require("passport-local");
 var app = express();
 
 var campgrounds = require("./routes/campgrounds");
@@ -40,6 +42,9 @@ var sessionConfig = {
 }
 app.use(session(sessionConfig))
 app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(express.urlencoded({extended: true}))
 app.use(methodOverride("_method"));
