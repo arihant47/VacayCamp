@@ -8,6 +8,7 @@ var session = require("express-session");
 var flash = require("connect-flash");
 var passport = require("passport");
 var LocalStrategy = require("passport-local");
+var User = require("./models/user");
 var app = express();
 
 var campgrounds = require("./routes/campgrounds");
@@ -45,6 +46,8 @@ app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
 
 app.use(express.urlencoded({extended: true}))
 app.use(methodOverride("_method"));
