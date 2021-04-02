@@ -11,8 +11,9 @@ var LocalStrategy = require("passport-local");
 var User = require("./models/user");
 var app = express();
 
-var campgrounds = require("./routes/campgrounds");
-var reviews = require("./routes/reviews");
+var userRoutes = require("./routes/users.js");
+var campgroundRoutes = require("./routes/campgrounds");
+var reviewRoutes = require("./routes/reviews");
 
 mongoose.connect("mongodb://localhost/vacay-camp", {
 	useNewUrlParser: true,
@@ -63,8 +64,9 @@ app.use(function(req, res, next){
 	next();
 });
 
-app.use("/campgrounds", campgrounds);
-app.use("/campgrounds/:id/reviews", reviews);
+app.use("/", userRoutes);
+app.use("/campgrounds", campgroundRoutes);
+app.use("/campgrounds/:id/reviews", reviewRoutes);
 
 app.get("/", function(req, res){
 	res.render("home");
