@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var catchAsync = require("../utils/catchAsync");
+var passport = require("passport");
 var User = require("../models/user");
 
 // REGISTER
