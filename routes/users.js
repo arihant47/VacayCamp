@@ -11,7 +11,7 @@ router.post("/register", async function(req, res){
 	var user = new User({email, username});
 	var registeredUser = await User.register(user, password);
 	console.log(registeredUser);
-	req.flash("Welcome to VacayCamp!");
+	req.flash("success", "Welcome to VacayCamp!");
 	res.redirect("/campgrounds");
 });
 
