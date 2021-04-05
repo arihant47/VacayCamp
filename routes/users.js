@@ -3,6 +3,7 @@ var router = express.Router();
 var catchAsync = require("../utils/catchAsync");
 var User = require("../models/user");
 
+// REGISTER
 router.get("/register", function(req,res){
 	res.render("users/register");
 });
@@ -19,5 +20,11 @@ router.post("/register", catchAsync(async function(req, res){
 		res.redirect("register");
 	}
 }));
+
+// LOGIN
+router.get("/login", function(req, res){
+	res.render("users/login");
+});
+
 
 module.exports = router;
