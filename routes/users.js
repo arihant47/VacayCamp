@@ -35,7 +35,7 @@ router.post("/login", passport.authenticate("local", {failureFlash: true, failur
 // LOGOUT
 router.get("/logout", function(req, res){
 	req.logout();
-	req.flash("succes", "Goodbye!");
+	req.flash("success", "Goodbye!");
 	res.redirect("/campgrounds");
 });
 
