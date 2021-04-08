@@ -32,7 +32,9 @@ router.get("/login", function(req, res){
 
 router.post("/login", passport.authenticate("local", {failureFlash: true, failureRedirect: "/login"}), function(req, res){
 	req.flash("success", "Welcome back!");
-	res.redirect("/campgrounds");
+	var redirectUrl = req.session.returnTo || "/campgrounds";
+	delete req.session.returnTo;
+	res.redirect(redirectUrl);
 });
 
 // LOGOUT
