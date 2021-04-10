@@ -55,7 +55,12 @@ router.get("/:id/edit", isLoggedIn, catchAsync( async function(req, res){
 
 router.put("/:id", isLoggedIn, validateCampground, catchAsync( async function(req, res){
 	var {id}= req.params;
-	var campground = await Campground.findByIdAndUpdate(id, {...req.body.campground});  //Using spread (...) operator here
+	var campground = await Campground.findById(id);
+	if(!campground.author.equals(req.user._id)){
+		req.flash("error", "You do not have permission to do that!");
+		return res.redirect(`/campgrounds/${id}`);
+	}
+	var camp = await Campground.findByIdAndUpdate(id, {...req.body.campground});  //Using spread (...) operator here
 	req.flash("success", "Successfully updated campground!");
 	res.redirect(`/campgrounds/${campground._id}`);
 }));
