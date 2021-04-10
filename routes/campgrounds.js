@@ -6,25 +6,7 @@ var Campground = require("../models/campground");
 var {campgroundSchema} = require("../schemas.js");
 var {isLoggedIn} = require("../middleware");
 
-var validateCampground = (req, res, next) => {
-	var {error} = campgroundSchema.validate(req.body);
-	if(error){
-		var msg = error.details.map(el => el.message).join(",")
-		throw new ExpressError(msg, 400)
-	} else {
-		next();
-	}
-}
 
-var isAuthor = async function(req, res, next){
-	var {id}= req.params;
-	var campground = await Campground.findById(id);
-	if(!campground.author.equals(req.user._id)){
-		req.flash("error", "You do not have permission to do that!");
-		return res.redirect(`/campgrounds/${id}`);
-	}
-	next();
-}
 
 router.get("/", catchAsync(async function(req, res){
 	var campgrounds = await Campground.find({});
