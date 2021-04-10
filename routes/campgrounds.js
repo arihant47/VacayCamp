@@ -64,14 +64,14 @@ router.get("/:id/edit", isLoggedIn, isAuthor, catchAsync( async function(req, re
 	res.render("campgrounds/edit", {campground});
 }));
 
-router.put("/:id", isLoggedIn, validateCampground, catchAsync( async function(req, res){
+router.put("/:id", isLoggedIn, isAuthor, validateCampground, catchAsync( async function(req, res){
 	var {id}= req.params;
-	var camp = await Campground.findByIdAndUpdate(id, {...req.body.campground});  //Using spread (...) operator here
+	var campground = await Campground.findByIdAndUpdate(id, {...req.body.campground});  //Using spread (...) operator here
 	req.flash("success", "Successfully updated campground!");
 	res.redirect(`/campgrounds/${campground._id}`);
 }));
 
-router.delete("/:id", isLoggedIn, catchAsync(async function(req, res){
+router.delete("/:id", isLoggedIn, isAuthor, catchAsync(async function(req, res){
 	var {id} = req.params;
 	await Campground.findByIdAndDelete(id);
 	req.flash("success", "Successfully deleted campground!");
