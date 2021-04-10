@@ -1,12 +1,8 @@
 var express = require("express");
 var router = express.Router();
 var catchAsync = require("../utils/catchAsync");
-var ExpressError = require("../utils/ExpressError");
 var Campground = require("../models/campground");
-var {campgroundSchema} = require("../schemas.js");
-var {isLoggedIn} = require("../middleware");
-
-
+var {isLoggedIn, isAuthor, validateCampground} = require("../middleware");
 
 router.get("/", catchAsync(async function(req, res){
 	var campgrounds = await Campground.find({});
