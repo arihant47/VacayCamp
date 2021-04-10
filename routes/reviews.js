@@ -4,17 +4,7 @@ var catchAsync = require("../utils/catchAsync");
 var ExpressError = require("../utils/ExpressError");
 var Review = require("../models/review");
 var Campground = require("../models/campground");
-var {reviewSchema} = require("../schemas.js");
-
-var validateReview = (req, res, next) => {
-	var {error} = reviewSchema.validate(req.body);
-	if(error){
-		var msg = error.details.map(el => el.message).join(",")
-		throw new ExpressError(msg, 400)
-	} else {
-		next();
-	}
-}
+var {validateReview} = require("../middleware");
 
 router.post("/", validateReview, catchAsync(async function(req, res){
 	var campground = await Campground.findById(req.params.id);

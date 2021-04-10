@@ -1,4 +1,4 @@
-var {campgroundSchema} = require("./schemas.js");
+var {campgroundSchema, reviewSchema} = require("./schemas.js");
 var ExpressError = require("./utils/ExpressError");
 var Campground = require("./models/campground");
 
@@ -11,7 +11,7 @@ module.exports.isLoggedIn = function(req, res, next){
 	next();
 }
 
-module.exports.validateCampground = (req, res, next) => {
+module.exports.validateCampground = function(req, res, next){
 	var {error} = campgroundSchema.validate(req.body);
 	if(error){
 		var msg = error.details.map(el => el.message).join(",")
@@ -29,4 +29,14 @@ module.exports.isAuthor = async function(req, res, next){
 		return res.redirect(`/campgrounds/${id}`);
 	}
 	next();
+}
+
+module.exports.validateReviews = function(req, res, next){
+	var {error} = reviewSchema.validate(req.body);
+	if(error){
+		var msg = error.details.map(el => el.message).join(",")
+		throw new ExpressError(msg, 400)
+	} else {
+		next();
+	}
 }
