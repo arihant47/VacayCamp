@@ -1,3 +1,7 @@
+var {campgroundSchema} = require("./schemas.js");
+var ExpressError = require("./utils/ExpressError");
+var Campground = require("./models/campground");
+
 module.exports.isLoggedIn = function(req, res, next){
 	if(!req.isAuthenticated()){
 		req.session.returnTo = req.originalUrl;
