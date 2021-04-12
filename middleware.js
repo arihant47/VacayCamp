@@ -31,7 +31,7 @@ module.exports.isAuthor = async function(req, res, next){
 	next();
 }
 
-module.exports.validateReviews = function(req, res, next){
+module.exports.validateReview = function(req, res, next){
 	var {error} = reviewSchema.validate(req.body);
 	if(error){
 		var msg = error.details.map(el => el.message).join(",")
