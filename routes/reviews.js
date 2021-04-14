@@ -9,6 +9,7 @@ var Campground = require("../models/campground");
 router.post("/",isLoggedIn, validateReview, catchAsync(async function(req, res){
 	var campground = await Campground.findById(req.params.id);
 	var review = new Review(req.body.review);
+	review.author = req.user._id;
 	campground.reviews.push(review);
 	await review.save();
 	await campground.save();
