@@ -4,6 +4,8 @@ var catchAsync = require("../utils/catchAsync");
 var Campground = require("../models/campground");
 var {isLoggedIn, isAuthor, validateCampground} = require("../middleware");
 var campgrounds = require("../controllers/campgrounds");
+var multer = require("multer");
+var upload = multer({dest: "uploads/"});
 
 router.route("/")
 	.get(catchAsync(campgrounds.index))
