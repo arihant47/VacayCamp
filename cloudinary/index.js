@@ -6,3 +6,14 @@ cloudinary.config({
 	api_key: process.env.CLOUDINARY_KEY,
 	api_secret: process.env.CLOUDINARY_SECRET
 });
+
+var storage = new CloudinaryStorage({
+	cloudinary,
+	folder: "VacayCamp",
+	allowedFormats: ["jpeg", "png", "jpg"]
+});
+
+module.exports = {
+	cloudinary,
+	storage
+}
