@@ -9,8 +9,10 @@ cloudinary.config({
 
 var storage = new CloudinaryStorage({
 	cloudinary,
-	folder: "VacayCamp",
-	allowedFormats: ["jpeg", "png", "jpg"]
+	params: {
+		folder: "VacayCamp",
+		allowedFormats: ["jpeg", "png", "jpg"]
+	}
 });
 
 module.exports = {
