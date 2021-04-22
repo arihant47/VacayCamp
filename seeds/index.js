@@ -27,9 +27,18 @@ var seedDB = async () => {
 			author: "606ed692a6f9e70428fa833e",
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
             title: `${sample(descriptors)} ${sample(places)}`,
-			image: "https://source.unsplash.com/collection/483251",
 			description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-			price
+			price,
+			images: [
+				{
+				url:	"https://res.cloudinary.com/arihant/image/upload/v1619093793/VacayCamp/nqz6ffdvnslp0daqptmz.jpg",
+					filrname: "VacayCamp/nqz6ffdvnslp0daqptmz"
+				},
+				{
+				url: "https://res.cloudinary.com/arihant/image/upload/v1619093791/VacayCamp/gudor020pospydjjptnh.jpg",
+				filename: "VacayCamp/gudor020pospydjjptnh"
+				}	
+			]
 			
         });
         await camp.save();
