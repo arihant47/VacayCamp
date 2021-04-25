@@ -2,14 +2,14 @@ var mongoose = require("mongoose");
 var Review = require("./review");
 var Schema = mongoose.Schema;
 
+var ImageSchema = new Schema({
+	url: String,
+	filename: String
+});
+
 var CampgroundSchema = new Schema({
 	title: String,
-	images: [
-		{
-			url: String,
-			filename: String
-		}
-	],
+	images: [ImageSchema],
 	price: Number,
 	description: String,
 	location: String,
