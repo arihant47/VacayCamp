@@ -15,7 +15,7 @@ module.exports.renderNewForm = function(req, res){
 
 module.exports.createCampground = async function(req, res, next){
 	var geoData = await geocoder.forwardGeocode({
-		query: "Nainital, Uttarakhand",
+		query: req.body.campground.location,
 		limit: 1
 	}).send()
 	res.send(geoData.body.features[0].geometry.coordinates);
