@@ -1,5 +1,7 @@
 var Campground = require("../models/campground");
 var mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
+var mapBoxToken = process.env.MAPBOX_TOKEN;
+mbxGeocoding({ accessToken: mapBoxToken });
 var {cloudinary} = require("../cloudinary");
 
 module.exports.index = async function(req, res){
