@@ -1,7 +1,7 @@
-mapboxgl.accessToken = '<%-process.env.MAPBOX_TOKEN%>';
+mapboxgl.accessToken = mapToken
 var map = new mapboxgl.Map({
 	container: 'map', // container ID
 	style: 'mapbox://styles/mapbox/streets-v11', // style URL
 	center: [-74.5, 40], // starting position [lng, lat]
-	zoom: 9 // starting zoom
+	zoom: 4 // starting zoom
 });
