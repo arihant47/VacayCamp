@@ -1,6 +1,11 @@
 <% layout("layouts/boilerplate")%>
 <link rel="stylesheet" href="/Stylesheets/stars.css">
 
+<script>
+	var mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+	var campground = <%- JSON.stringify(campground) %>
+</script>
+
 <div class="row">
     <div class="col-6">
 		<div id='map' style='width: 400px; height: 300px;'></div>
@@ -106,9 +111,5 @@
 	</div>
 </div>
 
-<script>
-	var mapToken = '<%-process.env.MAPBOX_TOKEN%>';
-	var campground = <%- JSON.stringify(campground) %>
-</script>
 
 <script src="/JavaScripts/showPageMap.js"></script>
