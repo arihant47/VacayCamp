@@ -29,6 +29,10 @@ var seedDB = async () => {
             title: `${sample(descriptors)} ${sample(places)}`,
 			description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
 			price,
+            geometry: {
+                type: "Point",
+                coordinates: [79.0193, 30.0668]
+            },
 			images: [
 				{
 				url:	"https://res.cloudinary.com/arihant/image/upload/v1619093793/VacayCamp/nqz6ffdvnslp0daqptmz.jpg",
