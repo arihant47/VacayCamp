@@ -20,7 +20,7 @@ var sample = array => array[Math.floor(Math.random() * array.length)];
 
 var seedDB = async () => {
     await Campground.deleteMany({});
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 300; i++) {
         var random1000 = Math.floor(Math.random() * 1000);
 		var price = Math.floor(Math.random() * 20) + 10;
         var camp = new Campground({
