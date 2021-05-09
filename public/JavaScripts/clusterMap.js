@@ -101,7 +101,7 @@ map.on('load', function () {
 	// the location of the feature, with
 	// description HTML from its properties.
 	map.on('click', 'unclustered-point', function (e) {
-		var text = e.features[0].properties.popUpMarkup;
+		var { popUpMarkup } = e.features[0].properties;
 		var coordinates = e.features[0].geometry.coordinates.slice();
 
 
@@ -114,9 +114,7 @@ map.on('load', function () {
 
 	new mapboxgl.Popup()
 		.setLngLat(coordinates)
-		.setHTML(
-			text
-		)
+		.setHTML(popUpMarkup)
 		.addTo(map);
 	});
 
