@@ -40,6 +40,10 @@ var CampgroundSchema = new Schema({
 	]
 });
 
+CampgroundSchema.virtual("properties.popUpMarkup").get(function(){
+	return "PopUp Text!!"
+});
+
 CampgroundSchema.post("findOneAndDelete", async function(doc){
 	if(doc){
 		await Review.deleteMany({
