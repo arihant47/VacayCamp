@@ -5,6 +5,8 @@ var map = new mapboxgl.Map({
 	center: [-103.59179687498357, 40.66995747013945],
 	zoom: 3
 });
+
+map.addControl(new mapboxgl.NavigationControl());
  
 map.on('load', function () {
 	// Add a new source from our GeoJSON data and
