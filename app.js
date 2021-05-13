@@ -13,6 +13,7 @@ var flash = require("connect-flash");
 var passport = require("passport");
 var LocalStrategy = require("passport-local");
 var User = require("./models/user");
+var mongoSanitize = require("express-mongo-sanitize");
 var app = express();
 
 var userRoutes = require("./routes/users.js");
@@ -61,6 +62,10 @@ app.use(express.urlencoded({extended: true}))
 app.use(methodOverride("_method"));
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(mongoSanitize({
+	replaceWith: '_'
+}));
 
 app.use(function(req, res, next){
 	if(!['/login', '/'].includes(req.originalUrl)){
