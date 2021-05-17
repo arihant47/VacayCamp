@@ -14,6 +14,7 @@ var passport = require("passport");
 var LocalStrategy = require("passport-local");
 var User = require("./models/user");
 var mongoSanitize = require("express-mongo-sanitize");
+var helmet = require("helmet");
 var app = express();
 
 var userRoutes = require("./routes/users.js");
@@ -51,6 +52,7 @@ var sessionConfig = {
 }
 app.use(session(sessionConfig))
 app.use(flash());
+app.use(helmet());
 
 app.use(passport.initialize());
 app.use(passport.session());
