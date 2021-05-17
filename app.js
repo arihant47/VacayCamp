@@ -38,11 +38,13 @@ app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, 'views'));
 
 var sessionConfig = {
+	name: 'session',
 	secret: 'thisisasecret!',
 	resave: false,
 	saveUninitialized: true,
 	cookie: {
 		httpOnly: true,
+		// secure: true,
 		expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
 		maxAge: 1000 * 60 * 60 * 24 * 7
 	}
