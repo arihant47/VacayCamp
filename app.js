@@ -14,7 +14,7 @@ var passport = require("passport");
 var LocalStrategy = require("passport-local");
 var User = require("./models/user");
 var mongoSanitize = require("express-mongo-sanitize");
-var helmet = require("helmet");
+// var helmet = require("helmet");
 var app = express();
 
 var userRoutes = require("./routes/users.js");
@@ -50,9 +50,9 @@ var sessionConfig = {
 		maxAge: 1000 * 60 * 60 * 24 * 7
 	}
 }
-app.use(session(sessionConfig))
+app.use(session(sessionConfig));
 app.use(flash());
-app.use(helmet({contentSecurityPolicy: false}));
+// app.use(helmet({ contentSecurityPolicy: false }));
 
 app.use(passport.initialize());
 app.use(passport.session());
