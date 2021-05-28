@@ -21,6 +21,8 @@ var userRoutes = require("./routes/users.js");
 var campgroundRoutes = require("./routes/campgrounds");
 var reviewRoutes = require("./routes/reviews");
 
+// var dbUrl = process.env.DB_URL;
+// "mongodb://localhost/vacay-camp"
 mongoose.connect("mongodb://localhost/vacay-camp", {
 	useNewUrlParser: true,
 	useCreateIndex: true,
