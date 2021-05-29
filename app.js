@@ -21,6 +21,8 @@ var userRoutes = require("./routes/users.js");
 var campgroundRoutes = require("./routes/campgrounds");
 var reviewRoutes = require("./routes/reviews");
 
+var MongoDBStore = require("connect-mongo")(session);
+
 // var dbUrl = process.env.DB_URL;
 // "mongodb://localhost/vacay-camp"
 mongoose.connect("mongodb://localhost/vacay-camp", {
@@ -39,6 +41,16 @@ db.once("open", function() {
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, 'views'));
+
+var store = new MongoDBStore({
+    url: dbUrl,
+    secret,
+    touchAfter: 24 * 60 * 60  //Time in seconds
+});
+
+store.on("error", function (e) {
+    console.log("Session Store Error", e)
+});
 
 var sessionConfig = {
 	name: 'session',
