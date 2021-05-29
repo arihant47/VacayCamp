@@ -23,9 +23,10 @@ var reviewRoutes = require("./routes/reviews");
 
 var MongoDBStore = require("connect-mongo")(session);
 
-// var dbUrl = process.env.DB_URL;
+var dbUrl = "mongodb://localhost/vacay-camp";
+//process.env.DB_URL;
 // "mongodb://localhost/vacay-camp"
-mongoose.connect("mongodb://localhost/vacay-camp", {
+mongoose.connect(dbUrl, {
 	useNewUrlParser: true,
 	useCreateIndex: true,
 	useUnifiedTopology: true,
@@ -44,7 +45,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 var store = new MongoDBStore({
     url: dbUrl,
-    secret,
+    secret: 'thisisasecret!',
     touchAfter: 24 * 60 * 60  //Time in seconds
 });
 
@@ -53,6 +54,7 @@ store.on("error", function (e) {
 });
 
 var sessionConfig = {
+	store,
 	name: 'session',
 	secret: 'thisisasecret!',
 	resave: false,
