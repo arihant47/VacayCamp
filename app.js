@@ -117,6 +117,7 @@ app.use((err, req, res, next) => {
 	res.status(statusCode).render("error", {err});
 });
 
-app.listen(3000, function(){
+var port = process.env.PORT || 3000;
+app.listen(port, function(){
 	console.log("The VacayCamp Server has started");
 });
