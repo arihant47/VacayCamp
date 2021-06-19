@@ -43,9 +43,11 @@ app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, 'views'));
 
+const secret = process.env.SECRET || 'thisisasecret!';
+
 var store = new MongoDBStore({
     url: dbUrl,
-    secret: 'thisisasecret!',
+    secret,
     touchAfter: 24 * 60 * 60  //Time in seconds
 });
 
@@ -56,7 +58,7 @@ store.on("error", function (e) {
 var sessionConfig = {
 	store,
 	name: 'session',
-	secret: 'thisisasecret!',
+	secret,
 	resave: false,
 	saveUninitialized: true,
 	cookie: {
