@@ -23,7 +23,7 @@ var reviewRoutes = require("./routes/reviews");
 
 var MongoDBStore = require("connect-mongo")(session);
 
-var dbUrl = "mongodb://localhost/vacay-camp";
+var dbUrl = process.env.DB_URL || "mongodb://localhost/vacay-camp";
 //process.env.DB_URL;
 // "mongodb://localhost/vacay-camp"
 mongoose.connect(dbUrl, {
